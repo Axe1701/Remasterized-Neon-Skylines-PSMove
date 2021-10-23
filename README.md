@@ -35,5 +35,5 @@ El solver que hemos utilizado en este proyecto es la versión realizada en C por
 
 ## Autores ✒️
 
-* **Dennis Marcell Sumiri Fernandez** - [llecram](https://github.com/llecram)
+* **Dennis Marcell Sumiri Fernandez** - [dennisMSF](https://github.com/dennisMSF)
 * **José Miguel Guzmán Chauca** - [Axe1701](https://github.com/Axe1701)
