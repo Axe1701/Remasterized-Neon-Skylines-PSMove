@@ -4,29 +4,9 @@ Cubo Rubik realizado con OpenGL en C y C++ con solver integrado y distintas anim
 
 ## Funcionalidades 📦
 
-| Movimiento | Letra Asociada |
-| ------------- | ------------- |
-| F  | F |
-| F | G |
-| R  | R |
-| R  | T |
-| U  | U |
-| U  | I |
-| B  | B |
-| B  | N |
-| L  | L |
-| L  | K |
-| D  | D |
-| D  | S |
-| SCRAMBLE  | Z |
-| SOLVE  | X |
-| Acercar Camara   | UP |
-| Alejar Camara  | DOWN |
-| Camara a la Izquierda  | LEFT |
-| Camara a la Derecha  | RIGHT |
-| Cambiar Posición Camara  | MOUSE |
 
-## Solver 📖
+
+## Instalación 📖
 
 El solver que hemos utilizado en este proyecto es la versión realizada en C por [muodov](https://github.com/muodov/kociemba).
 
@@ -35,5 +15,5 @@ El solver que hemos utilizado en este proyecto es la versión realizada en C por
 
 ## Autores ✒️
 
-* **Dennis Marcell Sumiri Fernandez** - [llecram](https://github.com/llecram)
+* **Dennis Marcell Sumiri Fernandez** - [DennisMSF](https://github.com/dennisMSF)
 * **José Miguel Guzmán Chauca** - [Axe1701](https://github.com/Axe1701)
