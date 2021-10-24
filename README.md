@@ -11,7 +11,7 @@ Variación del juego Neon Skylines para realizar los movimientos de la nave con 
 El solver que hemos utilizado en este proyecto es la versión realizada en C por [muodov](https://github.com/muodov/kociemba).
 
 ## Resultados
-![Demo](https://github.com/Axe1701/Rubik-s-Cube-Proyect/blob/master/Demo%20Cubo%20Rubik.mp4)
+![Demo](https://github.com/Axe1701/Remasterized-Neon-Skylines-PSMove/blob/master/Assets/hci_final.mp4)
 
 ## Autores ✒️
 
