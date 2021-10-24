@@ -12,7 +12,7 @@ Movimientos:
 
 ## Instalación 📖
 
-Para conectar los mandos PSMove, se utilizo la API desarrollada por Thomas Perl[thp](https://github.com/thp) (https://github.com/thp/psmoveapi), siguiendo los pasos descritos en su documentación. Cabe resaltar algo que no se menciona que son las dependencias necesarias que se necesita para lograr seguir esos pasos. Es necesario trabajar con VisualStudio  2017  con  todas  las  SDK  de  Windows  8.1 instaladas. Por otra parte tambien se necesitaba las herramientas especificas  de  depuracion  y  testing  que  vienen  con  Python  y la libreria ”Numpy” para poder trabajar con OpenCV.
+Para conectar los mandos PSMove, se utilizo la API desarrollada por Thomas Perl [thp](https://github.com/thp) (https://github.com/thp/psmoveapi), siguiendo los pasos descritos en su documentación. Cabe resaltar algo que no se menciona que son las dependencias necesarias que se necesita para lograr seguir esos pasos. Es necesario trabajar con VisualStudio  2017  con  todas  las  SDK  de  Windows  8.1 instaladas. Por otra parte tambien se necesitaba las herramientas especificas  de  depuracion  y  testing  que  vienen  con  Python  y la libreria ”Numpy” para poder trabajar con OpenCV.
 
 ## Resultados
 ![Demo](https://github.com/Axe1701/Remasterized-Neon-Skylines-PSMove/blob/master/Assets/hci_final.mp4)
