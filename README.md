@@ -3,7 +3,11 @@
 Variación del juego Neon Skylines para realizar los movimientos de la nave con los mandos Move de Play Station 3 y la cámara PS3 Eye utilizando PSMove API y Unity Move para el curso de Interacción Humano Computador.
 
 ## Funcionalidades 📦
-
+Movimientos:
+  -Arriba -> Mover los Controles Move hacia Adelante
+  -Abajo -> Mover los Controles Move hacia Abajo
+  -Derecha -> Girar los controles Move hacia la Derecha
+  -Izquierda -> Girar los controles Move hacia la Izquierda
 
 
 ## Instalación 📖
