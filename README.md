@@ -1,4 +1,4 @@
-# Rubik-s-Cube-Proyect 
+# Remasterized-Neon-Skylines-PSMove
 
 Cubo Rubik realizado con OpenGL en C y C++ con solver integrado y distintas animaciones para el curso de Computación Grafica (CS251)
 
