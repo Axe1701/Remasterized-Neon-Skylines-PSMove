@@ -4,10 +4,10 @@ Variación del juego Neon Skylines para realizar los movimientos de la nave con 
 
 ## Funcionalidades 📦
 Movimientos:
-  -Arriba -> Mover los Controles Move hacia Adelante
-  -Abajo -> Mover los Controles Move hacia Abajo
-  -Derecha -> Girar los controles Move hacia la Derecha
-  -Izquierda -> Girar los controles Move hacia la Izquierda
+  *Arriba -> Mover los Controles Move hacia Adelante
+  *Abajo -> Mover los Controles Move hacia Abajo
+  *Derecha -> Girar los controles Move hacia la Derecha
+  *Izquierda -> Girar los controles Move hacia la Izquierda
 
 
 ## Instalación 📖
