@@ -2,50 +2,63 @@
  * Written by Maxi Levi <maxilevi@live.com>, November 2017
  */
 
-
 using UnityEngine;
 using System.Collections;
 using Assets;
 using Assets.Generation;
 using System.Collections.Generic;
 using System;
+using UnityEngine.Networking;
 
-public class Movement : MonoBehaviour {
+public class Movement : NetworkBehaviour
+{
     private GameObject moveControllerPrefab;
+    public GameObject DebrisPrefab;
+    public Material TrailMaterial;
+    [SyncVar]
     public float Speed = 16;
-	public float TurnSpeed = 3f;
-	public TrailRenderer LeftTrail, RightTrail;
-	public Color TrailColor;
-	public Vector3 LeftPosition, RightPosition;
-	public Material TrailMaterial;
-	public AudioSource LeftSource, RightSource;
-	public AudioClip SwooshClip;
-	private GameObject Debris;
-	private bool _lock;
-	private float _leftTargetVolume = 1, _rightTargetVolume = 1;
-	private float _originalVolume;
-	private float _speed = 0;
-    private IntPtr tracker;
+    [SyncVar]
+    public float TurnSpeed = 3f;
+    [SyncVar]
+    public TrailRenderer LeftTrail, RightTrail;
+    [SyncVar]
+    public Color TrailColor;
+    [SyncVar]
+    public Vector3 LeftPosition, RightPosition;
+    [SyncVar]
+    public AudioSource LeftSource, RightSource;
+    [SyncVar]
+    public AudioClip SwooshClip;
+    [SyncVar]
+    private bool _lock;
+    [SyncVar]
+    private float _leftTargetVolume = 1, _rightTargetVolume = 1;
+    [SyncVar]
+    private float _originalVolume;
+    [SyncVar]
+    private float _speed = 0;
 
+    private IntPtr tracker;
     private List<UniMoveController> moves = new List<UniMoveController>();
 
-    public bool IsInSpawn{
-		get{ return (transform.parent.position - WorldGenerator.SpawnPosition).sqrMagnitude < WorldGenerator.SpawnRadius * WorldGenerator.SpawnRadius; }
-	}
+    [ServerCallback]
     void Start(){
+        //Debug.Log("Iniciando...");
         moveControllerPrefab = GameObject.Find("MoveController");
         Destroy(moveControllerPrefab);
         
         int count = UniMoveController.GetNumConnected();
 
         //UniMoveController.PSMoveTrackerSettings settings;
-        //unsafe{
+        //unsafe
+        //{
         //    UniMoveController.psmove_tracker_settings_set_default(&settings);
         //}
         //settings.color_mapping_max_age = 0;
         //settings.exposure_mode = PSMoveTracker_Exposure.Exposure_LOW;
         //settings.camera_mirror = PSMove_Bool.PSMove_True;
-        //unsafe{
+        //unsafe
+        //{
         //    tracker = UniMoveController.psmove_tracker_new_with_settings(&settings);
         //}
 
@@ -74,7 +87,7 @@ public class Movement : MonoBehaviour {
                 move.InitOrientation();
                 move.ResetOrientation();
 
-                //for ( ; ; ) {
+                //for (; ; ) {
                 //    PSMoveTracker_Status result = UniMoveController.psmove_tracker_enable(tracker, moves[i].handle);
                 //    Debug.Log("Trackeando...");
                 //    if (result == PSMoveTracker_Status.Tracker_CALIBRATED){
@@ -91,23 +104,17 @@ public class Movement : MonoBehaviour {
             }
         }
         
-        Debris = GameObject.FindGameObjectWithTag ("Debris");
+        DebrisPrefab = GameObject.FindGameObjectWithTag ("Debris");
 		LeftSource = GameObject.FindGameObjectWithTag ("LeftSource").GetComponent<AudioSource>();
 		RightSource = GameObject.FindGameObjectWithTag ("RightSource").GetComponent<AudioSource>();
 		_originalVolume = (RightSource.volume + LeftSource.volume) * .5f;
 	}
 
-	public void Lock(){
-		_lock = true;
-	}
-
-	public void Unlock(){
-		_lock = false;
-	}
-
-	// Update is called once per frame
-	void Update () {
-		LeftSource.volume = Mathf.Lerp (LeftSource.volume, _originalVolume * _leftTargetVolume, Time.deltaTime * 2f);
+    // Update is called once per frame
+    [ServerCallback]
+    void Update () {
+        //Debug.Log("Actualizando...");
+        LeftSource.volume = Mathf.Lerp (LeftSource.volume, _originalVolume * _leftTargetVolume, Time.deltaTime * 2f);
 		RightSource.volume = Mathf.Lerp (RightSource.volume, _originalVolume * _rightTargetVolume, Time.deltaTime * 2f);
 
 		if (LeftSource.volume < 0.05f)
@@ -148,8 +155,8 @@ public class Movement : MonoBehaviour {
 			StopTrail (ref RightTrail);
 			_rightTargetVolume = 0;
 		}
-        UniMoveController.psmove_tracker_update_image(tracker);
-        UniMoveController.psmove_tracker_update(tracker, IntPtr.Zero);
+        //UniMoveController.psmove_tracker_update_image(tracker);
+        //UniMoveController.psmove_tracker_update(tracker, IntPtr.Zero);
 
         float pendiente = 0;
         float rect_x = 0;
@@ -233,7 +240,22 @@ public class Movement : MonoBehaviour {
 
 	}
 
-	void StartTrail(ref TrailRenderer Trail, Vector3 Position){
+    public void Lock()
+    {
+        _lock = true;
+    }
+
+    public void Unlock()
+    {
+        _lock = false;
+    }
+
+    public bool IsInSpawn
+    {
+        get { return (transform.parent.position - WorldGenerator.SpawnPosition).sqrMagnitude < WorldGenerator.SpawnRadius * WorldGenerator.SpawnRadius; }
+    }
+
+    void StartTrail(ref TrailRenderer Trail, Vector3 Position){
 		if (Trail != null)
 			return;
 		GameObject go = new GameObject ("Trail");
@@ -251,10 +273,9 @@ public class Movement : MonoBehaviour {
 		if (Trail == null)
 			return;
 
-		Trail.transform.parent = (Debris != null) ?  Debris.transform : null;
+		Trail.transform.parent = (DebrisPrefab != null) ?  DebrisPrefab.transform : null;
 		Destroy (Trail.gameObject, Trail.time+1);
 		Trail = null;
 	}
-
 
 }

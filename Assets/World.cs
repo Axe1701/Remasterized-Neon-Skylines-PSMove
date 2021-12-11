@@ -6,20 +6,34 @@ using System.Collections;
 using System.Collections.Generic;
 using Assets.Generation;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class World : MonoBehaviour {
-
-	public GameObject Player;
-	public Material WorldMaterial;
+public class World : NetworkBehaviour
+{
+    public GameObject Player;
+    public GameObject Turret;
+    public Material WorldMaterial;
+    [SyncVar]
 	public Vector3 PlayerPosition, PlayerOrientation;
-	public int GenQueue, MeshQueue;
-	public readonly Dictionary<Vector3, Chunk> Chunks = new Dictionary<Vector3, Chunk>();
-	private MeshQueue _meshQueue;
-	private GenerationQueue _generationQueue;
-	public int ChunkLoaderRadius = 8;
-	public bool Loaded {get; set;}
+    [SyncVar]
+    public Vector3 TurretPosition, TurretOrientation;
+    [SyncVar]
+    public int GenQueue;
+    [SyncVar]
+    public int MeshQueue;
+    [SyncVar]
+    public readonly Dictionary<Vector3, Chunk> Chunks = new Dictionary<Vector3, Chunk>();
+    [SyncVar]
+    private MeshQueue _meshQueue;
+    [SyncVar]
+    private GenerationQueue _generationQueue;
+    [SyncVar]
+    public int ChunkLoaderRadius = 8;
+    [SyncVar]
+    public bool Loaded;
+    //public bool Loaded {get; set;}
 
-	void Awake(){
+    void Awake(){
 		Application.targetFrameRate = -1;
 		_meshQueue = new MeshQueue (this);
 		_generationQueue = new GenerationQueue (this);
@@ -31,13 +45,20 @@ public class World : MonoBehaviour {
 		PlayerPosition = Player.transform.position;
 		PlayerOrientation = Player.transform.forward;
 
-		int _genCount = 0, _meshCount = 0;
-		foreach (KeyValuePair<Vector3, Chunk> Pair in Chunks) {
-			if (!Pair.Value.IsGenerated)
-				_genCount++;
+        TurretPosition = Turret.transform.position;
+        TurretOrientation = Player.transform.forward;
 
-			if (Pair.Value.ShouldBuild)
-				_meshCount++;
+        int _genCount = 0, _meshCount = 0;
+		foreach (KeyValuePair<Vector3, Chunk> Pair in Chunks) {
+            if (!Pair.Value.IsGenerated)
+            {
+                _genCount++;
+            }
+
+            if (Pair.Value.ShouldBuild)
+            {
+                _meshCount++;
+            }
 		}
 
 		GenQueue = _genCount;

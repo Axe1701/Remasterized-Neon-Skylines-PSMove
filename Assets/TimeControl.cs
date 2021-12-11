@@ -11,35 +11,61 @@ using UnityStandardAssets.ImageEffects;
 using Assets.Generation;
 using Assets;
 using UnityEngine.SceneManagement;
-public class TimeControl : MonoBehaviour {
+using UnityEngine.Networking;
 
+public class TimeControl : NetworkBehaviour
+{
+    [SyncVar]
 	public RectTransform TimeBar;
-	public float EnergyLeft = 100;
-	public float EnergyUsage = 8;
-	public bool Using;
-	private bool WasPressed;
-	public Camera View;
-	public Text Score, ScoreCenter;
-	private float _score;
-	public bool Lost = true;//To simulate the start menu
-	public Text GameOver;
-	public RawImage Title;
-	public Text RestartBtn, StartBtn, ReturnBtn, TutorialBtn;
-	public GameObject PlayerPrefab;
-	public AudioSource Sound;
-	public Text InvertTxt;
-	public Image InvertCheck;
-	public Toggle Invert;
-	private Movement _movement;
-	private float _targetGameOver;
-	private float _targetRestart;
-	private float _targetScore;
-	private float _targetStart;
-	private float _targetTitle;
-	private float _targetPitch = 1;
-	private float _targetInvert;
+    [SyncVar]
+    public float EnergyLeft = 100;
+    [SyncVar]
+    public float EnergyUsage = 8;
+    [SyncVar]
+    public bool Using;
+    [SyncVar]
+    private bool WasPressed;
+    [SyncVar]
+    public Camera View;
+    [SyncVar]
+    public Text Score, ScoreCenter;
+    [SyncVar]
+    private float _score;
+    [SyncVar]
+    public bool Lost = true;//To simulate the start menu
+    [SyncVar]
+    public Text GameOver;
+    [SyncVar]
+    public RawImage Title;
+    [SyncVar]
+    public Text RestartBtn, StartBtn, ReturnBtn, TutorialBtn;    
+    [SyncVar]
+    public Text InvertTxt;
+    [SyncVar]
+    public Image InvertCheck;
+    [SyncVar]
+    public Toggle Invert;    
+    [SyncVar]
+    private float _targetGameOver;
+    [SyncVar]
+    private float _targetRestart;
+    [SyncVar]
+    private float _targetScore;
+    [SyncVar]
+    private float _targetStart;
+    [SyncVar]
+    private float _targetTitle;
+    [SyncVar]
+    private float _targetPitch = 1;
+    [SyncVar]
+    public float _targetInvert;
+    public GameObject PlayerPrefab;
+    public GameObject DebrisPrefab;
+    public GameObject turretprefab;
+    public AudioSource Sound;
+    public Movement _movement;
 
-	void Start(){
+    void Start(){
 		Lost = true;
 		Time.timeScale = .25f;
 		_targetStart = 1;
@@ -76,13 +102,16 @@ public class TimeControl : MonoBehaviour {
 
 		}
 	}
+
     public void LoadScene(string SceneName)
     {
         SceneManager.LoadScene(SceneName);
     }
+
+    [ClientRpc]
 	public void StartGame(){
 		Restart ();
-	}
+    }
 
 	public void Restart(){
 		if (!Lost)
@@ -99,12 +128,15 @@ public class TimeControl : MonoBehaviour {
 		_score = 0;
 		_targetScore = 0;
 		EnergyLeft = 100;
-		Destroy (GameObject.FindGameObjectWithTag("Player"));
-		Destroy (GameObject.FindGameObjectWithTag("Debris"));
+        NetworkServer.Destroy(GameObject.FindGameObjectWithTag("Player"));
+        NetworkServer.Destroy(GameObject.FindGameObjectWithTag("Debris"));
+        //Destroy(GameObject.FindGameObjectWithTag("Player"));
+        //Destroy(GameObject.FindGameObjectWithTag("Debris"));
 
-		GameObject Debris = new GameObject ("Debris");
-		Debris.tag = "Debris";
-		OpenSimplexNoise.Load (Random.Range(int.MinValue, int.MaxValue));
+        //GameObject Debris = new GameObject("Debris"); Debris.tag = "Debris";
+        GameObject Debris = Instantiate<GameObject>(DebrisPrefab, Vector3.zero, Quaternion.identity);
+        NetworkServer.Spawn(Debris);
+        OpenSimplexNoise.Load (Random.Range(int.MinValue, int.MaxValue));
 
 		World world = GameObject.FindGameObjectWithTag ("World").GetComponent<World>();
 		Chunk[] chunks = null;
@@ -115,8 +147,15 @@ public class TimeControl : MonoBehaviour {
 			world.RemoveChunk (chunks[i]);
 	
 		GameObject go = Instantiate<GameObject>(PlayerPrefab, Vector3.zero, Quaternion.identity);
-		world.Player = go;
-		_movement = go.GetComponentInChildren<Movement> ();
+        NetworkServer.Spawn(go);
+        world.Player = go;
+
+        Vector3 turret_initial_pos = new Vector3(go.transform.position.x + 1.5f, go.transform.position.y + 1.5f, go.transform.position.z + 1.5f);
+        GameObject turretgo = Instantiate<GameObject>(turretprefab, turret_initial_pos, Quaternion.identity);
+        NetworkServer.Spawn(turretgo);
+        world.Turret = turretgo;
+
+        _movement = go.GetComponentInChildren<Movement> ();
 		go.GetComponent<ShipCollision> ().Control = this.GetComponent<TimeControl> ();
 		GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<FollowShip>().TargetShip = go;
 

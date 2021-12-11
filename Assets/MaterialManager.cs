@@ -5,15 +5,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class MaterialManager : MonoBehaviour {
+public class MaterialManager : NetworkBehaviour {
 
-	public Material Terrain;
-	public Color[] PossibleColors;
-	public Color CurrentColor;
+    public Material Terrain;
+    [SyncVar]
+    public Color[] PossibleColors;
+    [SyncVar]
+    public Color CurrentColor;
+    [SyncVar]
 	public float MaxThickness = 0.3f, MinThickness = 0.15f;
-	public float Time;
-	public float ChangeTime = 32; 
+    [SyncVar]
+    public float Time;
+    [SyncVar]
+    public float ChangeTime = 32; 
 
 	void Update(){
 

@@ -8,15 +8,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.Generation;
+using UnityEngine.Networking;
 
-public class ShipCollision : MonoBehaviour {
-
+public class ShipCollision : NetworkBehaviour
+{
 	public TimeControl Control;
 	public GameObject Model;
 	public Movement Controls;
 	public AudioSource CrashAudio;
 	public World World;
-	private bool _lock = false;
+    [SyncVar]
+    private bool _lock = false;
 
 	void Start(){
 		World = GameObject.FindGameObjectWithTag ("World").GetComponent<World>();
@@ -33,7 +35,6 @@ public class ShipCollision : MonoBehaviour {
 			DestroyShip ();
 		}*/
 	}
-
 
 	void DestroyShip(){
 		if (_lock)

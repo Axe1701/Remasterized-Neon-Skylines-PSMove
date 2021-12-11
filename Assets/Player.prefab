@@ -247,6 +247,8 @@ GameObject:
   - component: {fileID: 4329532083364398}
   - component: {fileID: 114330974736651708}
   - component: {fileID: 54858096489146716}
+  - component: {fileID: -7127816960472609009}
+  - component: {fileID: 8268264489387308976}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -303,6 +305,61 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-7127816960472609009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487220595160186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8258ea15b8f74c4889ce485d21cbbb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &8268264489387308976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487220595160186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d6c522af31447398568cc65334232b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.033333335
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!1 &1776622171047102
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,6 +406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b67576e7da945d4abe2e66b1d91a4a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DebrisPrefab: {fileID: 0}
+  TrailMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   Speed: 12
   TurnSpeed: 2.75
   LeftTrail: {fileID: 96019907841751074}
@@ -356,7 +415,6 @@ MonoBehaviour:
   TrailColor: {r: 0.07035923, g: 0, b: 1, a: 1}
   LeftPosition: {x: 3, y: -0.6, z: -0.9}
   RightPosition: {x: -3, y: -0.6, z: -0.9}
-  TrailMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   LeftSource: {fileID: 0}
   RightSource: {fileID: 0}
   SwooshClip: {fileID: 8300000, guid: b0db1972f5dfd1b4f9b1d1cb55c4fef3, type: 3}
