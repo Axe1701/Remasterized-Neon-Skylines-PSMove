@@ -18,7 +18,7 @@ Para conectar los mandos PSMove, se utilizo la API desarrollada por Thomas Perl-
 Finalmente, para la conexión de los mandos PSMove a Unity se utilizo la extension brindada por [CopenhagenGameCollective](https://github.com/CopenhagenGameCollective/UniMove) siguiendo los pasos descritos en el repositorio. Cabe resaltar que se utilizo una versión antigua donde se puedan utilizar los dll´s generados por la API del PSMove: "psmove.dll" y "psmove_tracker.dll", ya que, el dll propuesto en la ultima versión del proyecto "libpsmoveapi.dll" es no funcional.
 
 ## Resultados
-![Demo Movimientos](https://github.com/Axe1701/Remasterized-Neon-Skylines-PSMove/blob/master/Assets/hci_final.mp4)
+![Resultados](https://github.com/Axe1701/Remasterized-Neon-Skylines-PSMove/HCI_final.mp4)
 
 ## Autores ✒️
 
