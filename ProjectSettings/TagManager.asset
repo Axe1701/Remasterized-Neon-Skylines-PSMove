@@ -8,6 +8,7 @@ TagManager:
   - RightSource
   - LeftSource
   - Debris
+  - SpeechText
   layers:
   - Default
   - TransparentFX
